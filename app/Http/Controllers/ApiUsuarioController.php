@@ -23,7 +23,8 @@ class ApiUsuarioController extends Controller
         if ($user->hasAnyRole(['Administrador', 'Supervisor', 'Invitado'])) {
             //$data = DB::connection('mysql2')->table('usuarios')->get();
             $data = Usuario::all();
-            //->join('telefonos', 'usuarios.usuario_id', '=', 'telefonos.usuario_id')->get();
+            //$data = DB::connection('mysql2')->select('call obtener(?)',array(1));
+            //$data = DB::connection('mysql2')->table('usuarios')->join('telefonos', 'usuarios.usuario_id', '=', 'telefonos.usuario_id')->get();
             /*return response()->json([
                 'code' => '10',
                 'message' => 'Peticion Exitosa',
@@ -37,6 +38,7 @@ class ApiUsuarioController extends Controller
             ]);
         }
         //$data = DB::connection('mysql2')->table('usuarios')->get();
+        //$data = DB::connection('mysql2')->select('call obtener(?)',array(1));
     }
 
     /**
