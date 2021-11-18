@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ErrorResource;
 use App\Http\Resources\UsuarioResource;
 use App\Http\Resources\UsuarioCollection;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +20,10 @@ class ApiUsuarioController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user->hasAnyRole(['Invitado'])) {
-            $data = DB::connection('mysql2')->table('usuarios')->get();
+        if ($user->hasAnyRole(['Administrador', 'Supervisor', 'Invitado'])) {
+            //$data = DB::connection('mysql2')->table('usuarios')->get();
+            $data = Usuario::all();
+            //->join('telefonos', 'usuarios.usuario_id', '=', 'telefonos.usuario_id')->get();
             /*return response()->json([
                 'code' => '10',
                 'message' => 'Peticion Exitosa',
