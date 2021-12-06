@@ -20,17 +20,8 @@ class ApiUsuarioController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user->hasAnyRole(['Administrador', 'Supervisor', 'Invitado'])) {
-            //$data = DB::connection('mysql2')->table('usuarios')->get();
-            $data = Usuario::all();
-            //$data = DB::connection('mysql2')->select('call obtener(?)',array(1));
-            //$data = DB::connection('mysql2')->table('usuarios')->join('telefonos', 'usuarios.usuario_id', '=', 'telefonos.usuario_id')->get();
-            /*return response()->json([
-                'code' => '10',
-                'message' => 'Peticion Exitosa',
-                'data' => $data
-            ]);*/
-            return new UsuarioCollection($data);
+        if ($user->hasAnyRole(['Administrador'])) {
+            
         } else {
             return response()->json([
                 'code' => '20',
